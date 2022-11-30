@@ -4,3 +4,54 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+:root {
+    /* PALETTE */
+    --col-primary: rgb(0, 150, 136);
+    --col-secondary: rgba(219, 219, 211, 1);
+    --col-tab-header: rgb(234, 234, 234);
+    --col-bubble-you: rgb(213, 249, 186);
+    --col-bubble-other: rgb(255, 255, 255);
+
+}
+
+body {
+
+    /* Size */
+    width: 100%;
+    height: 100vh;
+
+    /* Style */
+    background: rgb(0, 150, 136);
+    background: linear-gradient(180deg, rgba(0, 150, 136, 1) 0%, rgba(0, 150, 136, 1) 12%, rgba(219, 219, 211, 1) 12%, rgba(219, 219, 211, 1) 100%);
+
+    /* Display */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* General App container */
+#app {
+    /* Size */
+    height: 90%;
+    width: 100%;
+    max-width: 1600px;
+    background-color: snow;
+}
+
+/* each #app direct child (therefore TABS elements) */
+#app>div {
+    height: 90%;
+}
+
+/* Chat List tab */
+#tab-chat-list {
+    flex: 0 1 20%;
+}
+
+/* Active Chat tab */
+#tab-chat {
+    flex: 0 1 50%;
+}
