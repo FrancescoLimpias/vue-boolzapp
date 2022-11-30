@@ -4,10 +4,10 @@ const Boolzapp = createApp({
 
     // APP METHODS
     methods: {
-        sendMessage(){
+        sendMessage() {
 
             // Message validation
-            if(this.newMessage.trim() == ""){
+            if (this.newMessage.trim() == "") {
                 return;
             }
 
@@ -17,6 +17,15 @@ const Boolzapp = createApp({
                 message: this.newMessage,
                 status: "sent",
             });
+
+            // Send mock response
+            setTimeout(() => {
+                this.activeContact.messages.push({
+                    date: undefined,
+                    message: "ok",
+                    status: "received",
+                });
+            }, 1000);
 
             // Clear message
             this.newMessage = "";
