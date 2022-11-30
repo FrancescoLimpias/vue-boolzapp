@@ -31,6 +31,7 @@ const Boolzapp = createApp({
     // APP DATA
     data() {
         return {
+            chatFilter: undefined,
             activeContact: undefined,
             newMessage: "",
             personalContact: {

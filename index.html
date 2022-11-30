@@ -40,28 +40,30 @@
 
             <!-- chat lookup -->
             <div class="search">
-                <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat">
+                <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat" v-model="chatFilter">
             </div>
 
             <!-- chats list -->
             <ol id="chat-list">
 
-                <li v-for="contact in contacts" @click="this.activeContact = contact">
-                    <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
-                    <div class="contact">
-                        <span class="name">
-                            {{contact.name}}
-                        </span>
-                        <span class="text-desc text-subtle">
-                            {{contact.messages[contact.messages.length - 1].message}}
-                        </span>
-                    </div>
-                    <div class="info">
-                        <span class="time">
-                            {{contact.messages[contact.messages.length - 1].date}}
-                        </span>
-                    </div>
-                </li>
+                <template v-for="contact in contacts">
+                    <li v-if="!chatFilter || contact.name.startsWith(chatFilter)" @click="this.activeContact = contact">
+                        <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
+                        <div class="contact">
+                            <span class="name">
+                                {{contact.name}}
+                            </span>
+                            <span class="text-desc text-subtle">
+                                {{contact.messages[contact.messages.length - 1].message}}
+                            </span>
+                        </div>
+                        <div class="info">
+                            <span class="time">
+                                {{contact.messages[contact.messages.length - 1].date}}
+                            </span>
+                        </div>
+                    </li>
+                </template>
 
             </ol>
 
