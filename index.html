@@ -26,7 +26,8 @@
 
             <!-- tab header (own profile information) -->
             <header>
-                Sofia
+                <img :src="'imgs/avatar' + personalContact.avatar + '.jpg'" alt="">
+                {{personalContact.name}}
             </header>
 
             <!-- enable notifications -->
@@ -42,7 +43,7 @@
             <!-- chats list -->
             <ol id="chat-list">
 
-                <li v-for="contact in contacts">
+                <li v-for="contact in contacts" @click="this.activeContact = contact">
                     <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
                     <div class="contact">
                         <span class="name">
@@ -66,10 +67,36 @@
         <!-- tab with active chat -->
         <div id="tab-chat" class="tab">
 
-            <!-- tab header (contact profile information) -->
-            <header>
-                Michele
-            </header>
+            <div v-if="this.activeContact">
+                <!-- there is a active chat to show -->
+
+                <!-- tab header (contact profile information) -->
+                <header>
+                    <img :src="'imgs/avatar' + activeContact.avatar + '.jpg'" alt="">
+                    {{activeContact.name}}
+                </header>
+
+                <ol id="chat">
+                    <li v-for="message in activeContact.messages" :class="{personal: message.status == 'sent'}">
+                        <span>
+                            {{message.message}}
+                        </span>
+                        <span>
+                            {{message.date}}
+                        </span>
+                    </li>
+                </ol>
+
+            </div>
+
+            <div id="tab-chat-empty" v-else>
+                <div>
+                    <h1>
+                        Boolzapp Web
+                    </h1>
+                    <span>Send and receive messages without keeping your phone online.</span>
+                </div>
+            </div>
 
         </div>
 

@@ -63,9 +63,21 @@ body {
     flex-direction: column;
 }
 
-.tab>header {
+.tab header{
+    /* Size */
+    height: 60px;
     flex: 0 0 60px;
+
+    /* Style */
     background-color: var(--col-tab-header);
+
+    /* Display */
+    display: flex;
+    align-items: center;
+}
+.tab header > img{
+    height: 90%;
+    border-radius: 50%;
 }
 
 /* Chat List tab */
@@ -100,4 +112,25 @@ body {
 /* Active Chat tab */
 #tab-chat {
     width: 70%;
+}
+
+#chat li{
+    background-color: var(--col-bubble-other);
+}
+
+#chat li.personal{
+    background-color: var(--col-bubble-you);
+}
+
+#tab-chat-empty{
+    /* Size */
+    height: 70%;
+
+    /* Style */
+    text-align: center;
+
+    /* Display */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

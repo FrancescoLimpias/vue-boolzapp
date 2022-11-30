@@ -4,12 +4,16 @@ const Boolzapp = createApp({
 
     // APP METHODS
     methods: {
-
     },
 
     // APP DATA
     data() {
         return {
+            activeContact: undefined,
+            personalContact: {
+                name: "Sofia",
+                avatar: "_io"
+            },
             contacts: [
                 {
                     name: 'Michele',
