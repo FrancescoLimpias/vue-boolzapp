@@ -22,12 +22,54 @@
     <div id="app">
 
         <!-- tab with chat list -->
-        <div id="tab-chat-list">
+        <div id="tab-chat-list" class="tab">
+
+            <!-- tab header (own profile information) -->
+            <header>
+                Sofia
+            </header>
+
+            <!-- enable notifications -->
+            <div id="notification-push">
+                Notifiche
+            </div>
+
+            <!-- chat lookup -->
+            <div class="search">
+                <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat">
+            </div>
+
+            <!-- chats list -->
+            <ol id="chat-list">
+
+                <li v-for="contact in contacts">
+                    <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
+                    <div class="contact">
+                        <span class="name">
+                            {{contact.name}}
+                        </span>
+                        <span class="text-desc text-subtle">
+                            {{contact.messages[contact.messages.length - 1].message}}
+                        </span>
+                    </div>
+                    <div class="info">
+                        <span class="time">
+                            {{contact.messages[contact.messages.length - 1].date}}
+                        </span>
+                    </div>
+                </li>
+
+            </ol>
 
         </div>
 
         <!-- tab with active chat -->
-        <div id="tab-chat">
+        <div id="tab-chat" class="tab">
+
+            <!-- tab header (contact profile information) -->
+            <header>
+                Michele
+            </header>
 
         </div>
 
