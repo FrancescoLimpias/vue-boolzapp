@@ -63,7 +63,7 @@ body {
     flex-direction: column;
 }
 
-.tab header{
+.tab .bar {
     /* Size */
     height: 60px;
     flex: 0 0 60px;
@@ -73,9 +73,12 @@ body {
 
     /* Display */
     display: flex;
+    justify-content: space-around;
     align-items: center;
+    gap: .5rem;
 }
-.tab header > img{
+
+.tab .bar>img {
     height: 90%;
     border-radius: 50%;
 }
@@ -86,7 +89,7 @@ body {
 
 }
 
-#notification-push{
+#notification-push {
     flex: 0 0 80px;
     background-color: #8edafc;
 }
@@ -95,7 +98,7 @@ body {
     overflow: auto;
 }
 
-#chat-list li{
+#chat-list li {
     /* Size */
     height: 72px;
 
@@ -105,7 +108,8 @@ body {
     /* Display */
     display: flex;
 }
-#chat-list img{
+
+#chat-list img {
     border-radius: 50%;
 }
 
@@ -114,16 +118,32 @@ body {
     width: 70%;
 }
 
-#chat li{
+#chat {
+    flex: 1 0 80%;
+}
+
+#chat li {
     background-color: var(--col-bubble-other);
 }
 
-#chat li.personal{
+#chat li.personal {
     background-color: var(--col-bubble-you);
 }
 
-#tab-chat-empty{
+
+#send-message-container button {
+    flex: 0 0 50px;
+}
+
+#send-message-container input {
+    flex: 1 0 70%;
+    height: 50%;
+    /* border-radius: 5px; */
+}
+
+#tab-chat-empty {
     /* Size */
+    width: 70%;
     height: 70%;
 
     /* Style */

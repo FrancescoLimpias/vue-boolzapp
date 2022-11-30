@@ -4,12 +4,35 @@ const Boolzapp = createApp({
 
     // APP METHODS
     methods: {
+        sendMessage(){
+
+            // Message validation
+            if(this.newMessage.trim() == ""){
+                return;
+            }
+
+            // Message sending
+            this.activeContact.messages.push({
+                date: undefined,
+                message: this.newMessage,
+                status: "sent",
+            });
+
+            // Clear message
+            this.newMessage = "";
+        }
+    },
+
+    mounted() {
+        // DEBUG => then remove following loc
+        this.activeContact = this.contacts[0];
     },
 
     // APP DATA
     data() {
         return {
             activeContact: undefined,
+            newMessage: "",
             personalContact: {
                 name: "Sofia",
                 avatar: "_io"

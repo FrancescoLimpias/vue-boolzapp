@@ -10,6 +10,9 @@
     <title>Boolzapp</title>
 
     <!-- Res -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="main.js"></script>
@@ -25,7 +28,7 @@
         <div id="tab-chat-list" class="tab">
 
             <!-- tab header (own profile information) -->
-            <header>
+            <header class="bar">
                 <img :src="'imgs/avatar' + personalContact.avatar + '.jpg'" alt="">
                 {{personalContact.name}}
             </header>
@@ -65,39 +68,60 @@
         </div>
 
         <!-- tab with active chat -->
-        <div id="tab-chat" class="tab">
+        <div v-if="this.activeContact" id="tab-chat" class="tab">
 
-            <div v-if="this.activeContact">
-                <!-- there is a active chat to show -->
+            <!-- there is a active chat to show -->
 
-                <!-- tab header (contact profile information) -->
-                <header>
-                    <img :src="'imgs/avatar' + activeContact.avatar + '.jpg'" alt="">
-                    {{activeContact.name}}
-                </header>
+            <!-- tab header (contact profile information) -->
+            <header class="bar">
+                <img :src="'imgs/avatar' + activeContact.avatar + '.jpg'" alt="">
+                {{activeContact.name}}
+            </header>
 
-                <ol id="chat">
-                    <li v-for="message in activeContact.messages" :class="{personal: message.status == 'sent'}">
-                        <span>
-                            {{message.message}}
-                        </span>
-                        <span>
-                            {{message.date}}
-                        </span>
-                    </li>
-                </ol>
+            <!-- actual chat view with message bubbles -->
+            <ol id="chat">
+                <li v-for="message in activeContact.messages" :class="{personal: message.status == 'sent'}">
+                    <span>
+                        {{message.message}}
+                    </span>
+                    <span>
+                        {{message.date}}
+                    </span>
+                </li>
+            </ol>
+
+            <!-- send message container -->
+            <div id="send-message-container" class="bar">
+
+                <!-- emojee -->
+                <button>
+                    <i class="fa-regular fa-face-smile"></i>
+                </button>
+
+                <!-- message input -->
+                <input type="text" name="message" id="" placeholder="Write a message" v-model="newMessage" @keydown.enter="sendMessage">
+
+                <!-- send type -->
+                <button v-if="newMessage.length == 0">
+                    <!-- audio message -->
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+                <button v-else @click="sendMessage">
+                    <!-- text message -->
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
 
             </div>
 
-            <div id="tab-chat-empty" v-else>
-                <div>
-                    <h1>
-                        Boolzapp Web
-                    </h1>
-                    <span>Send and receive messages without keeping your phone online.</span>
-                </div>
-            </div>
+        </div>
 
+        <div id="tab-chat-empty" v-else>
+            <div>
+                <h1>
+                    Boolzapp Web
+                </h1>
+                <span>Send and receive messages without keeping your phone online.</span>
+            </div>
         </div>
 
     </div>
