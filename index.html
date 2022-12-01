@@ -25,6 +25,20 @@
     <!-- App Container -->
     <div id="app">
 
+        <!-- context menu -->
+        <div id="context-menu" v-show="this.menuDisplay">
+            <ul>
+                <li>
+                    Info
+                </li>
+            </ul>
+            <ul>
+                <li @click="deleteMessage">
+                    Elimina
+                </li>
+            </ul>
+        </div>
+
         <!-- tab with chat list -->
         <div id="tab-chat-list" class="tab">
 
@@ -62,7 +76,7 @@
 
             <!-- chat lookup -->
             <div class="search">
-                <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat" v-model="chatFilter">
+                <input type="text" name="" id="" placeholder=" 🔎 Cerca o inizia una nuova chat" v-model="chatFilter">
             </div>
 
             <!-- chats list -->
@@ -114,7 +128,8 @@
 
             <!-- actual chat view with message bubbles -->
             <ol id="chat">
-                <li v-for="message in activeContact.messages" :class="{personal: message.status == 'sent'}">
+                <li v-for="(message, index) in activeContact.messages" :class="{personal: message.status == 'sent'}"
+                    @click.right="showContextMenu(index)">
                     <span>
                         {{message.message}}
                     </span>

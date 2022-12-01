@@ -19,7 +19,7 @@
 
 /* UTILITY CLASSES */
 .text-subtle {
-    color: #bfadb2;
+    color: #b2aba5;
     font-size: small;
 }
 
@@ -38,6 +38,27 @@ body {
     justify-content: center;
     align-items: center;
 
+}
+
+/* Context Menu */
+#context-menu{
+    position: absolute;
+    background-color: snow;
+    border: 1px solid lightgray;
+    padding: .1rem;
+    border-radius: 5px;
+}
+#context-menu ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#context-menu li{
+    padding: .2rem .4rem;
+    border-radius: 2px;
+}
+#context-menu li:hover{
+    background-color: lightgray;
 }
 
 /* General App container */
@@ -91,6 +112,10 @@ body {
     height: 80%;
     border-radius: 50%;
     flex: 0 0 50px;
+    transition: all .2s;
+}
+.tab .bar>.item:hover {
+    background-color: lightgray;
 }
 
 .tab .bar>.spacer {
@@ -159,6 +184,7 @@ body {
     height: 100%;
     border-radius: 2px;
     border: 1px solid lightgray;
+    padding: .6rem;
 }
 
 /* chat list */
@@ -183,6 +209,7 @@ body {
     gap: .8rem;
 }
 
+#chat-list li:hover,
 #chat-list li.active {
     background-color: #e9ebeb;
 }
@@ -222,10 +249,11 @@ body {
 #chat li {
     /* size */
     width: fit-content;
+    max-width: 70%;
 
     /* style */
     margin-top: .2rem;
-    padding: .4rem .8rem;
+    padding: .4rem .8rem .1rem;
 
     /* display */
     display: flex;
@@ -241,6 +269,10 @@ body {
     border-radius: 12px 2px 12px 12px;
     align-self: flex-end;
     background-color: var(--col-bubble-you);
+}
+
+#chat li span:first-of-type {
+    margin-right: .6rem;
 }
 
 #chat li span:last-of-type {
@@ -259,10 +291,13 @@ body {
 #tab-chat-empty {
     /* Size */
     width: 70%;
-    height: 70%;
+    height: 100%;
 
     /* Style */
     text-align: center;
+    background-image: url(imgs/mine.jpg);
+    font-size: x-large;
+    color:rgba(0, 27, 25, 5);
 
     /* Display */
     display: flex;

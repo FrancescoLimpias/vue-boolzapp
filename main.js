@@ -71,17 +71,45 @@ const Boolzapp = createApp({
         // Provides date object from date string
         parseDate(dateString) {
             return luxon.DateTime.fromFormat(dateString, this.dateFormat);
-        }
+        },
+
+        // Show message context menu
+        showContextMenu(messageIndex) {
+            this.menuDisplay = true;
+            this.menuRef.style.top = this.mousePosition.y + ".px";
+            this.menuRef.style.left = this.mousePosition.x + ".px";
+            this.menuIndex = messageIndex;
+        },
+
+        // Delete message
+        deleteMessage() {
+            this.activeContact.messages.splice(this.menuIndex, 1);
+        },
     },
 
     mounted() {
         // DEBUG => then remove following loc
-        this.activeContact = this.contacts[0];
+        // this.activeContact = this.contacts[0];
+        this.menuRef = document.getElementById("context-menu");
+        document.addEventListener("mousemove", (event) => {
+            this.mousePosition = {
+                x: event.clientX,
+                y: event.clientY,
+            }
+        })
+        document.getElementById("app").addEventListener("contextmenu", (e) => e.preventDefault());
+        window.addEventListener("click", () => {
+            this.menuDisplay = false;
+        })
     },
 
     // APP DATA
     data() {
         return {
+            menuRef: undefined,
+            menuDisplay: false,
+            menuIndex: undefined,
+            mousePosition: undefined,
             dateFormat: "dd/MM/y h:m:ss",
             chatFilter: undefined,
             activeContact: undefined,
