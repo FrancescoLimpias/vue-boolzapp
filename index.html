@@ -30,8 +30,19 @@
 
             <!-- tab header (own profile information) -->
             <header class="bar">
-                <img :src="'imgs/avatar' + personalContact.avatar + '.jpg'" alt="">
-                {{personalContact.name}}
+                <img :src="'imgs/avatar' + personalContact.avatar + '.jpg'" alt="" class="item">
+                <div class="spacer">
+                    {{personalContact.name}}
+                </div>
+                <button class="item">
+                    <i class="fa-solid fa-circle-notch"></i>
+                </button>
+                <button class="item">
+                    <i class="fa-solid fa-message"></i>
+                </button>
+                <button class="item">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
             </header>
 
             <!-- enable notifications -->
@@ -58,8 +69,8 @@
             <ol id="chat-list">
 
                 <template v-for="contact in contacts">
-                    <li v-if="!chatFilter || contact.name.startsWith(chatFilter)" :class="{active: contact == this.activeContact}"
-                        @click="this.activeContact = contact">
+                    <li v-if="!chatFilter || contact.name.startsWith(chatFilter)"
+                        :class="{active: contact == this.activeContact}" @click="this.activeContact = contact">
                         <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
                         <div class="contact">
                             <span class="name">
@@ -84,12 +95,21 @@
         <!-- tab with active chat -->
         <div v-if="this.activeContact" id="tab-chat" class="tab">
 
-            <!-- there is a active chat to show -->
-
             <!-- tab header (contact profile information) -->
             <header class="bar">
-                <img :src="'imgs/avatar' + activeContact.avatar + '.jpg'" alt="">
-                {{activeContact.name}}
+                <img :src="'imgs/avatar' + activeContact.avatar + '.jpg'" alt="" class="item">
+                <div class="spacer">
+                    {{activeContact.name}}
+                </div>
+                <button class="item">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="item">
+                    <i class="fa-solid fa-paperclip"></i>
+                </button>
+                <button class="item">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
             </header>
 
             <!-- actual chat view with message bubbles -->
@@ -108,20 +128,20 @@
             <div id="send-container" class="bar">
 
                 <!-- emojee -->
-                <button>
+                <button class="item">
                     <i class="fa-regular fa-face-smile"></i>
                 </button>
 
                 <!-- message input -->
-                <input type="text" name="message" id="" placeholder="Write a message" v-model="newMessage"
-                    @keydown.enter="sendMessage">
+                <input type="text" name="message" class="spacer" id="" placeholder="Write a message"
+                    v-model="newMessage" @keydown.enter="sendMessage">
 
                 <!-- send type -->
-                <button v-if="newMessage.length == 0">
+                <button v-if="newMessage.length == 0" class="item">
                     <!-- audio message -->
                     <i class="fa-solid fa-microphone"></i>
                 </button>
-                <button v-else @click="sendMessage">
+                <button v-else @click="sendMessage" class="item">
                     <!-- text message -->
                     <i class="fa-regular fa-paper-plane"></i>
                 </button>
