@@ -150,7 +150,7 @@ body {
 /* chat list */
 #chat-list {
     overflow: auto;
-
+    border-top: 1px solid rgb(221, 221, 221);
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -234,14 +234,19 @@ body {
 }
 
 
-#send-message-container button {
+#send-container button {
     flex: 0 0 50px;
+    border: none;
+    font-size: x-large;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
 }
-
-#send-message-container input {
+#send-container input {
     flex: 1 0 70%;
-    height: 50%;
-    /* border-radius: 5px; */
+    height: 60%;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: .6rem;
 }
 
 #tab-chat-empty {
