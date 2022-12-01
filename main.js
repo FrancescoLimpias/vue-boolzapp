@@ -4,6 +4,8 @@ const Boolzapp = createApp({
 
     // APP METHODS
     methods: {
+
+        // Sends new message
         sendMessage() {
 
             // Message validation
@@ -11,9 +13,13 @@ const Boolzapp = createApp({
                 return;
             }
 
+            // Create date instance
+            let date = luxon.DateTime.now();
+            date = date.toFormat(this.dateFormat).toString();
+
             // Message sending
             this.activeContact.messages.push({
-                date: undefined,
+                date: date,
                 message: this.newMessage,
                 status: "sent",
             });
@@ -21,7 +27,7 @@ const Boolzapp = createApp({
             // Send mock response
             setTimeout(() => {
                 this.activeContact.messages.push({
-                    date: undefined,
+                    date: date,
                     message: "ok",
                     status: "received",
                 });
@@ -29,6 +35,42 @@ const Boolzapp = createApp({
 
             // Clear message
             this.newMessage = "";
+        },
+
+        // Builds string with last message from a contact
+        getLastMessageString(contact) {
+
+            // get last message
+            const lastMessage = contact.messages[contact.messages.length - 1];
+
+            // calc last sender
+            const lastSender = lastMessage.status == "sent" ? "Tu" : contact.name;
+
+            // build string
+            return lastSender + ": " + lastMessage.message;
+        },
+
+        // Returns string with message time
+        getMessageTime(message) {
+            // get date object
+            const date = this.parseDate(message.date);
+
+            // build time string
+            return date.hour + ":" + date.minute;
+        },
+
+        // Returns string with last message time
+        getLastMessageTime(contact) {
+
+            // get last message
+            const lastMessage = contact.messages[contact.messages.length - 1];
+
+            return this.getMessageTime(lastMessage);
+        },
+
+        // Provides date object from date string
+        parseDate(dateString) {
+            return luxon.DateTime.fromFormat(dateString, this.dateFormat);
         }
     },
 
@@ -40,6 +82,7 @@ const Boolzapp = createApp({
     // APP DATA
     data() {
         return {
+            dateFormat: "dd/MM/y h:m:ss",
             chatFilter: undefined,
             activeContact: undefined,
             newMessage: "",
@@ -133,7 +176,7 @@ const Boolzapp = createApp({
                 },
                 {
                     name: 'Alessandro L.',
-                    avatar: '_5',
+                    avatar: '_1',
                     visible: true,
                     messages: [
                         {
@@ -150,7 +193,7 @@ const Boolzapp = createApp({
                 },
                 {
                     name: 'Claudia',
-                    avatar: '_6',
+                    avatar: '_2',
                     visible: true,
                     messages: [
                         {
@@ -172,7 +215,7 @@ const Boolzapp = createApp({
                 },
                 {
                     name: 'Federico',
-                    avatar: '_7',
+                    avatar: '_3',
                     visible: true,
                     messages: [
                         {
@@ -189,7 +232,7 @@ const Boolzapp = createApp({
                 },
                 {
                     name: 'Davide',
-                    avatar: '_8',
+                    avatar: '_4',
                     visible: true,
                     messages: [
                         {

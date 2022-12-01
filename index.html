@@ -14,6 +14,7 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.1/build/global/luxon.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="main.js"></script>
 
@@ -35,7 +36,17 @@
 
             <!-- enable notifications -->
             <div id="notification-push">
-                Notifiche
+                <div>
+                    <i class="fa-solid fa-bell-slash"></i>
+                </div>
+                <div>
+                    <span>
+                        Ricevi notifiche di nuovi messaggi
+                    </span>
+                    <a href="">
+                        Attiva notifiche desktop
+                    </a>
+                </div>
             </div>
 
             <!-- chat lookup -->
@@ -47,19 +58,20 @@
             <ol id="chat-list">
 
                 <template v-for="contact in contacts">
-                    <li v-if="!chatFilter || contact.name.startsWith(chatFilter)" @click="this.activeContact = contact">
+                    <li v-if="!chatFilter || contact.name.startsWith(chatFilter)" :class="{active: contact == this.activeContact}"
+                        @click="this.activeContact = contact">
                         <img :src="'imgs/avatar' + contact.avatar + '.jpg'" alt="contact.name + ' profile photo'">
                         <div class="contact">
                             <span class="name">
                                 {{contact.name}}
                             </span>
                             <span class="text-desc text-subtle">
-                                {{contact.messages[contact.messages.length - 1].message}}
+                                {{getLastMessageString(contact)}}
                             </span>
                         </div>
                         <div class="info">
-                            <span class="time">
-                                {{contact.messages[contact.messages.length - 1].date}}
+                            <span class="time text-subtle">
+                                {{getLastMessageTime(contact)}}
                             </span>
                         </div>
                     </li>
@@ -86,8 +98,8 @@
                     <span>
                         {{message.message}}
                     </span>
-                    <span>
-                        {{message.date}}
+                    <span class="text-subtle">
+                        {{getMessageTime(message)}}
                     </span>
                 </li>
             </ol>
@@ -101,7 +113,8 @@
                 </button>
 
                 <!-- message input -->
-                <input type="text" name="message" id="" placeholder="Write a message" v-model="newMessage" @keydown.enter="sendMessage">
+                <input type="text" name="message" id="" placeholder="Write a message" v-model="newMessage"
+                    @keydown.enter="sendMessage">
 
                 <!-- send type -->
                 <button v-if="newMessage.length == 0">
