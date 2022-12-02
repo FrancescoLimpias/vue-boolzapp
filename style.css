@@ -156,6 +156,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: .7rem;
 }
 
 #notification-push div:first-of-type {
